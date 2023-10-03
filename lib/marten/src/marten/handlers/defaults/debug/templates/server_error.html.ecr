@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+    <title><%= "#{error.class} at #{request.path}" %></title>
+    <style>/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}main{display:block}h1{font-size:2em;margin:.67em 0}hr{box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace,monospace;font-size:1em}a{background-color:transparent}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:bolder}code,kbd,samp{font-family:monospace,monospace;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:.35em .75em .625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details{display:block}summary{display:list-item}template{display:none}[hidden]{display:none}</style>
+    <style>
+      html, body, td, input {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+      }
+
+      html {
+        font-size: 1rem;
+        line-height: 1.6;
+        background: #fff;
+      }
+
+      header {
+        padding: 3rem 4rem;
+        background-color: #eb6864;
+      }
+
+      header > h1 {
+        margin: 0.25rem 0;
+        font-size: 1.8rem;
+        line-height: 2.2rem;
+        color: #fff;
+      }
+
+      header > h1 > .exception-class {
+        color: #363636;
+      }
+
+      header > .exception-message {
+        font-size: 1.2rem;
+        color: #fff;
+      }
+
+      .logo-wrapper {
+        float: right;
+      }
+
+      section {
+        padding: 3rem;
+        position: relative;
+      }
+
+      section.exception-details {
+        background-color: #fff;
+        color: #4a4a4a;
+        white-space: nowrap;
+      }
+
+      section.exception-details .template-preview {
+        margin: 0 1rem;
+      }
+
+      section.exception-details .template-preview > h2{
+        margin-top: 0;
+        color: #363636;
+      }
+
+      section.exception-details .template-preview > .filepath {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+        font-weight: bold;
+        background-color: #eb6864;
+        color: #fff;
+      }
+
+      section.exception-details .template-preview > .snippet {
+        margin-bottom: 2.5rem;
+        padding-top: 0.5rem;
+        background-color: #fdeded;
+      }
+
+      section.exception-details .template-preview > .snippet > pre.lines-wrapper {
+        margin: 0;
+        line-height: 1.2rem;
+        overflow: scroll;
+      }
+
+      section.exception-details .template-preview > .snippet > .lines-wrapper > .line {
+        display: inline-block;
+        white-space: pre;
+        padding: 0 1rem;
+        font-size: 0.8rem;
+        width: calc(100% - 2rem);
+      }
+
+      section.exception-details .template-preview > .snippet > .lines-wrapper > .line > .number {
+        margin-right: 1rem;
+        display: inline-block;
+        width: 42px;
+        color: #b01b17;
+      }
+
+      section.exception-details .template-preview > .snippet > .lines-wrapper > .line > .code {
+        margin-right: 1rem;
+        display: inline-block;
+        color: #4a4a4a;
+      }
+
+      section.exception-details .template-preview > .snippet > .lines-wrapper > .highlighted {
+        background-color: #f8bfbf;
+      }
+
+      section.exception-details .code-previews-and-traces {
+        margin: 0 1rem;
+      }
+
+      section.exception-details .code-previews {
+        display: inline-block;
+        width: 50%;
+        vertical-align: top;
+      }
+
+      section.exception-details .code-previews > h2 {
+        margin-top: 0;
+        color: #363636;
+      }
+
+      section.exception-details .code-previews > .code-preview {
+        overflow: scroll;
+      }
+
+      section.exception-details .code-previews > .code-preview.hidden {
+        display: none;
+      }
+
+      section.exception-details .code-previews > .code-preview > .filepath {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+        font-weight: bold;
+        background-color: #eb6864;
+        color: #fff;
+      }
+
+       section.exception-details .code-previews > .code-preview > .snippet {
+        margin-bottom: 1.5rem;
+        padding-top: 0.5rem;
+        background-color: #fdeded;
+      }
+
+      section.exception-details .code-previews > .code-preview > .snippet > pre.lines-wrapper {
+        margin: 0;
+        line-height: 1.2rem;
+        overflow: scroll;
+      }
+
+      section.exception-details .code-previews > .code-preview > .snippet > .lines-wrapper > .line {
+        display: inline-block;
+        white-space: pre;
+        padding: 0 1rem;
+        font-size: 0.8rem;
+      }
+
+      section.exception-details .code-previews > .code-preview > .snippet > .lines-wrapper > .line > .number {
+        margin-right: 1rem;
+        display: inline-block;
+        width: 42px;
+        color: #b01b17;
+      }
+
+      section.exception-details .code-previews > .code-preview > .snippet > .lines-wrapper > .line > .code {
+        margin-right: 1rem;
+        display: inline-block;
+        color: #4a4a4a;
+      }
+
+      section.exception-details .code-previews > .code-preview > .snippet > .lines-wrapper > .highlighted {
+        background-color: #f8bfbf;
+      }
+
+      section.exception-details .back-trace {
+        display: inline-block;
+        width: 50%;
+        vertical-align: top;
+      }
+
+      section.exception-details .back-trace > h2 {
+        margin-top: 0;
+        margin-left: 1rem;
+      }
+
+      section.exception-details .back-trace > .traces {
+        padding: 0.5rem 1rem;
+      }
+
+      section.exception-details .back-trace > .traces > label {
+        position: relative;
+        padding-left: 2rem;
+        display: block;
+        font-size: 0.8rem;
+        font-weight: bold;
+      }
+
+      section.exception-details .back-trace > .traces > label input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+      }
+
+      section.exception-details .back-trace > .traces > label .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 1.2rem;
+        width: 1.2rem;
+        background-color: #dee5ed;
+      }
+
+      section.exception-details .back-trace > .traces > label:hover input ~ .checkmark {
+        background-color: #ccc;
+      }
+
+      section.exception-details .back-trace > .traces > label input:checked ~ .checkmark {
+        background-color: #eb6864;
+      }
+
+      section.exception-details .back-trace > .traces > label .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+      }
+
+      section.exception-details .back-trace > .traces > label input:checked ~ .checkmark:after {
+        display: block;
+      }
+
+      section.exception-details .back-trace > .traces > label .checkmark:after {
+        top: 0.2rem ;
+        left: 0.4rem;
+        width: 0.2rem;
+        height: 0.5rem;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
+
+      section.exception-details .back-trace > .traces > ul.trace-list {
+        margin: 0;
+        padding: 0;
+        padding-top: 1rem;
+      }
+
+      section.exception-details .back-trace > .traces > ul.trace-list > li {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+      }
+
+      section.exception-details .back-trace > .traces > ul.trace-list > li.hideable {
+        display: none;
+      }
+
+      section.exception-details .back-trace > .traces > ul.trace-list > li.hideable.displayed {
+        display: block;
+      }
+
+      section.exception-details .back-trace > .traces > ul.trace-list > li >.trace {
+        margin: 0;
+        padding: 0.3rem 0.35rem;
+        display: block;
+        width: 100%;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+        font-size: 0.8rem;
+        text-align: left;
+        overflow: hidden;
+        white-space: nowrap;
+        color: #666;
+      }
+
+      section.exception-details .back-trace > .traces > ul.trace-list > li >.trace:hover,
+      section.exception-details .back-trace > .traces > ul.trace-list > li >.trace:focus {
+        background-color: #dbdbdb;
+      }
+
+      section.exception-details .back-trace > .traces > ul.trace-list > li >.trace:active {
+        background-color: #dbdbdb;
+      }
+
+      section.exception-details .back-trace > .traces > ul.trace-list > li >.trace.selected {
+        background-color: #fdeded;
+      }
+
+      section.exception-details .back-trace > .traces > ul.trace-list > li >.trace > .wrapper:before {
+        content: '';
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        background: #8694a4;
+        border-radius: 50%;
+        margin-right: 8px;
+      }
+
+      section.exception-details .back-trace > .traces > ul.trace-list > li >.trace > .dep-filename {
+        float: right;
+        max-width: 30%;
+        color: #eb6864;
+      }
+
+      section.exception-details .back-trace > .traces > ul.trace-list > li >.trace.selected > .wrapper:before {
+        background-color: #eb6864;
+      }
+
+      section.exception-details .back-trace > .traces > ul.trace-list > li >.trace.selected > .dep-filename {
+        color: #eb6864;
+      }
+
+      section.information {
+        background-color: #fafafa;
+        color: rgba(10,10,10,.9);
+        white-space: nowrap;
+      }
+
+      section.information h2 {
+        margin-top: 0;
+        color: #363636;
+      }
+
+      section.information dl {
+        margin-top: 0;
+        margin-bottom: 0.2rem;
+        font-size: 0.8rem !important;
+      }
+
+      section.information dl > dt {
+        width: 20%;
+        float: left;
+        overflow: hidden;
+        font-weight: bold;
+        color: #eb6864;
+      }
+
+      section.information dl pre {
+        margin: 0;
+      }
+
+      section.information > .general {
+        margin: 0 1rem;
+        margin-bottom: 2rem;
+      }
+
+      section.information > .request-details {
+        margin: 0 1rem;
+        overflow: scroll;
+      }
+
+      section.information > .request-details table.request-key-values tbody td {
+        padding-right: 1rem;
+        border-top: 1px dashed #ccc;
+      }
+
+      section.information > .request-details table.request-key-values th {
+        padding-right: 1rem;
+        text-align: left;
+      }
+
+      footer > .dislaimer {
+        text-align: center;
+        font-size: 0.8rem;
+        color: #bbb;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo-wrapper">
+        <svg width="60px" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900.000000 966.000000" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <style>.cls-1{fill:#fff;}.cls-2{fill:#333;}</style>
+          </defs>
+          <g transform="translate(-550.000000,-514.000000) scale(1)" stroke="none">
+            <path class="cls-1" d="M1000,559.71,618.69,779.86v440.28L1000,1440.29l381.31-220.15V779.86Zm351.8,643.4L1000,1406.2,648.2,1203.11V796.89L1000,593.8l351.8,203.09Z"/>
+            <polygon class="cls-1" points="940.72 1250.23 922.97 1235.43 735.81 1080.41 825.1 941.51 781.75 811.37 810.75 782.5 881.34 832.7 864.32 849.23 910.53 828.75 944.48 814.68 981.98 821.54 998.14 1250.23 940.72 1250.23"/>
+            <polygon class="cls-1" points="1264.19 1080.41 1077.03 1235.43 1059.28 1250.23 1001.86 1250.23 1018.02 821.54 1055.47 814.68 1089.47 828.75 1135.68 849.23 1118.66 832.7 1189.25 782.5 1218.25 811.37 1174.9 941.51 1264.19 1080.41"/>
+            <path class="cls-2" d="M1003.72,1262.53H955.47l44.53,37.14,0-.91.1.09,0,.82,44.53-37.14Z"/>
+          </g>
+        </svg>
+      </div>
+      <h1><span class="exception-class"><%= error.class %></span> at <%= request.path %></h1>
+      <div class="exception-message"><%= error.message ? HTML.escape(error.message.to_s.lines.first) : "Error" %></div>
+    </header>
+    <% if !frames.empty? %>
+    <section class="exception-details">
+      <% if !template_snippet_lines.nil? %>
+        <div class="template-preview">
+          <h2>Template</h2>
+          <div class="filepath"><%= error.as(Marten::Template::Errors::InvalidSyntax).filepath.to_s %></div>
+          <div class="snippet">
+            <pre class="lines-wrapper"><%- template_snippet_lines.not_nil!.each do |snippet_line| -%><span class="line <% if snippet_line[2] %>highlighted<% end %>"><span class="number"><%= snippet_line[1] %></span><span class="code"><%= HTML.escape(snippet_line[0].rstrip) %></span></span><br /><%- end -%></pre>
+          </div>
+        </div>
+      <% end %>
+      <div class="code-previews-and-traces">
+        <div class="code-previews">
+          <h2>Snippet</h2>
+          <% frames.each do |frame| %>
+          <div class="code-preview <% if frame.index > 0 %>hidden<% end %>" data-index="<%= frame.index %>">
+            <div class="filepath"><%= frame.filepath %></div>
+            <div class="snippet">
+              <%- if frame.snippet_lines.empty? -%>
+                <div class="lines-wrapper">No code available.</div>
+              <%- else -%>
+                <pre class="lines-wrapper"><%- frame.snippet_lines.each do |snippet_line| -%><span class="line <% if snippet_line[2] %>highlighted<% end %>"><span class="number"><%= snippet_line[1] %></span><span class="code"><%= snippet_line[0].rstrip %></span></span><br /><%- end -%></pre>
+              <%- end -%>
+            </div>
+          </div>
+          <% end %>
+        </div>
+        <div class="back-trace">
+          <h2>Traceback</h2>
+          <div class="traces">
+            <label><input type="checkbox" /> Show all traces<span class="checkmark"></span></label>
+            <ul class="trace-list">
+              <% frames.each do |frame| %>
+              <li class="trace-item <% if frame.index > 9 %>hideable<% end %>">
+                <button class="trace <% if frame.index == 0 %>selected<% end %>" data-index="<%= frame.index %>">
+                  <span class="wrapper">
+                    <span class="filepath">
+                      <%= frame.filepath %><% if frame.line_number %><span class="line_number">:<%= frame.line_number %></span><% end %>
+                    </span>
+                  </span>
+                  <span class="dep-filename"><% if !frame.dep_name.nil? %><%= frame.dep_name %> &bull; <% end %><%= frame.filename %></span>
+                </button>
+              </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="information">
+      <div class="general">
+        <h2>General information</h2>
+        <dl>
+          <dt>Request method</dt>
+          <dd><pre><%= request.method %></pre></dd>
+        </dl>
+        <dl>
+          <dt>Full path</dt>
+          <dd><pre><%= request.full_path %></pre></dd>
+        </dl>
+        <dl>
+          <dt>Exception class</dt>
+          <dd><pre><%= error.class %></pre></dd>
+        </dl>
+        <dl>
+          <dt>Exception message</dt>
+          <dd><pre><%= error.message %></pre></dd>
+        </dl>
+        <dl>
+          <dt>Marten version</dt>
+          <dd><pre><%= Marten::VERSION %></pre></dd>
+        </dl>
+        <dl>
+          <dt>Crystal version</dt>
+          <dd><pre><%= Crystal::VERSION %></pre></dd>
+        </dl>
+        <dl>
+          <dt>Server time</dt>
+          <dd><pre><%= Time.local.to_s %></pre></dd>
+        </dl>
+      </div>
+      <div class="request-details">
+        <h2>Request details</h2>
+        <dl>
+          <dt>Query params</dt>
+          <dd>
+            <% if request.query_params.empty? %>
+            No query params
+            <% else %>
+            <table class="request-key-values" cellspacing="0" cellpadding="0">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% request.query_params.each do |key, values| %>
+                  <tr>
+                    <td><pre><%= key %></pre></td>
+                    <td><pre><%= values %></pre></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <% end %>
+          </dd>
+        </dl>
+        <dl>
+          <dt>Data</dt>
+          <dd>
+            <% if request.data.empty? %>
+            No data
+            <% else %>
+            <table class="request-key-values" cellspacing="0" cellpadding="0">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% request.data.each do |key, values| %>
+                  <tr>
+                    <td><pre><%= key %></pre></td>
+                    <td><pre><%= values %></pre></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <% end %>
+          </dd>
+        </dl>
+        <dl>
+          <dt>Headers</dt>
+          <dd>
+            <% if request.headers.empty? %>
+            No headers
+            <% else %>
+            <table class="request-key-values" cellspacing="0" cellpadding="0">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% request.headers.each do |key, values| %>
+                  <tr>
+                    <td><pre><%= key %></pre></td>
+                    <td><pre><%= values %></pre></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <% end %>
+          </dd>
+        </dl>
+      </div>
+    </section>
+    <footer>
+      <p class="dislaimer">You are seeing this page because Marten is running in debug mode.</p>
+    </footer>
+    <% end %>
+    <script type="text/javascript">
+      document.addEventListener('DOMContentLoaded', () => {
+        function processShowAllTracesChange(target) {
+          if (target.checked) {
+            hideableTraceItems.forEach((item) => {
+              item.classList.add('displayed');
+            });
+          } else {
+            hideableTraceItems.forEach((item) => {
+              item.classList.remove('displayed');
+            });
+          }
+        }
+
+        const traceButtons = document.querySelectorAll('.back-trace .trace-item .trace');
+        const hideableTraceItems = document.querySelectorAll('.back-trace .trace-item.hideable');
+        const showAllTracesCheckbox = document.querySelector('.back-trace .traces label input');
+
+        showAllTracesCheckbox.addEventListener('change', (event) => {
+          processShowAllTracesChange(event.currentTarget);
+        });
+        processShowAllTracesChange(showAllTracesCheckbox);
+
+        traceButtons.forEach((item) => {
+          item.addEventListener('click', (event) => {
+            const target = event.currentTarget;
+            const index = target.dataset.index;
+
+            document.querySelector('.back-trace .trace.selected').classList.remove('selected');
+
+            document.querySelectorAll('.code-previews .code-preview').forEach((codePreviewItem) => {
+              if(codePreviewItem.dataset.index == index) {
+                codePreviewItem.classList.remove('hidden');
+              } else {
+                codePreviewItem.classList.add('hidden');
+              }
+            });
+
+            target.classList.add('selected');
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

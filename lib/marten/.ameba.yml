@@ -1,0 +1,24 @@
+Globs:
+  - "src/**/*.cr"
+  - "spec/**/*.cr"
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Lint/NotNil:
+  Enabled: false
+
+Performance/AnyInsteadOfEmpty:
+  Enabled: true
+  Excluded:
+    - src/marten/db/management/migrations/reader.cr
+
+Layout/LineLength:
+  Enabled: true
+  MaxLength: 120
+
+Style/ParenthesesAroundCondition:
+  Enabled: false
+
+Style/QueryBoolMethods:
+  Enabled: false

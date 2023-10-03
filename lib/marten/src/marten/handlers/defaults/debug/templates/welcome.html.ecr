@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+    <title>Welcome to Marten Framework!</title>
+    <style>/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}main{display:block}h1{font-size:2em;margin:.67em 0}hr{box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace,monospace;font-size:1em}a{background-color:transparent}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:bolder}code,kbd,samp{font-family:monospace,monospace;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:.35em .75em .625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details{display:block}summary{display:list-item}template{display:none}[hidden]{display:none}</style>
+    <style>
+      html, body, td, input {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+      }
+
+      html {
+        font-size: 15px;
+        line-height: 1.6;
+        background-color: #fff;
+        color: #4a4a4a;
+      }
+
+      .hero > .image-wrapper {
+        padding: 1rem;
+        background: linear-gradient(180deg, #904e95 0, #eb6864);
+        border-top: 4px solid #eb6864;
+        text-align: center;
+      }
+
+      .hero > h1 {
+        margin: 4rem 0;
+        text-align: center;
+        color: #525252;
+      }
+
+      .explanation {
+        margin: 0 auto;
+        width: 50%;
+        text-align: center;
+        color: #4a4a4a;
+      }
+
+      main > .shortcut-links {
+        margin: 0 auto;
+        margin-top: 3rem;
+        width: 50%;
+        text-align: center;
+      }
+
+      main > .shortcut-links > a {
+        padding: 1rem;
+        background: #eb6864;
+        text-decoration: none;
+        border-radius: 4px;
+        color: #fff;
+        transition: all .25s ease-in-out;
+      }
+
+      main > .shortcut-links > a:hover,
+      main > .shortcut-links > a:focus {
+        background: #ea5d59;
+      }
+
+      footer {
+        margin: 0 auto;
+        margin-top: 4rem;
+        padding: 2rem 0;
+        width: 75%;
+        border-top: 1px solid #efefef;
+      }
+
+      footer > .useful-links {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+
+      footer > .useful-links > a {
+        margin: 0 1rem;
+        gap: 10px;
+        display: grid;
+        box-sizing: border-box;
+        text-align: center;
+        text-decoration: none;
+      }
+
+      footer > .useful-links > a > .icon {
+        margin: 0 auto;
+        padding: 0.75rem;
+        border: 1px solid #d6d6d6;
+        border-radius: 100%;
+        display: block;
+      }
+
+      footer > .useful-links > a > .icon > svg {
+        display: block;
+        width: 1.5rem;
+        height: 1.5rem;
+        color: #525252;
+      }
+
+      footer > .useful-links > a > .content {
+        font-weight: 300;
+        line-height: 1.25;
+        color: #4a4a4a;
+        display: block;
+      }
+
+      footer > .useful-links > a > .content > .title {
+        display: block;
+        font-size: 1.25rem;
+        font-weight: 400;
+        line-height: 2rem;
+        color: #eb6864;
+      }
+
+      footer > .useful-links > a > .content > .subtitle {
+        display: block;
+      }
+
+      footer > .versions {
+        margin: 0 auto;
+        margin-top: 4rem;
+        width: 50%;
+        text-align: center;
+        font-size: 12px;
+      }
+
+      footer > .versions > .version {
+        display: inline-block;
+        white-space: nowrap;
+      }
+
+      footer > .versions strong {
+        color: #eb6864;
+      }
+
+      @media (max-width: 1250px) {
+        footer {
+          width: 95%;
+        }
+
+        footer > .useful-links > a {
+          margin: 0 0.5rem;
+          gap: 10px;
+          display: grid;
+          box-sizing: border-box;
+          text-align: center;
+          text-decoration: none;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .explanation {
+          width: 70%;
+        }
+
+        .hero > .image-wrapper > svg {
+          width: 50%;
+        }
+
+        footer > .useful-links {
+          display: grid;
+          grid-template-columns: 1fr;
+        }
+
+        footer > .useful-links > a {
+          margin-bottom: 2rem;
+        }
+
+        footer > .versions > p > .version {
+          display: block;
+        }
+
+        footer > .versions > p > .bull {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="hero">
+      <div class="image-wrapper">
+        <svg width="15%" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900.000000 966.000000" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <style>.cls-1{fill:#fff;}.cls-2{fill:#333;}</style>
+          </defs>
+          <g transform="translate(-550.000000,-514.000000) scale(1)" stroke="none">
+            <path class="cls-1" d="M1000,559.71,618.69,779.86v440.28L1000,1440.29l381.31-220.15V779.86Zm351.8,643.4L1000,1406.2,648.2,1203.11V796.89L1000,593.8l351.8,203.09Z"/>
+            <polygon class="cls-1" points="940.72 1250.23 922.97 1235.43 735.81 1080.41 825.1 941.51 781.75 811.37 810.75 782.5 881.34 832.7 864.32 849.23 910.53 828.75 944.48 814.68 981.98 821.54 998.14 1250.23 940.72 1250.23"/>
+            <polygon class="cls-1" points="1264.19 1080.41 1077.03 1235.43 1059.28 1250.23 1001.86 1250.23 1018.02 821.54 1055.47 814.68 1089.47 828.75 1135.68 849.23 1118.66 832.7 1189.25 782.5 1218.25 811.37 1174.9 941.51 1264.19 1080.41"/>
+            <path class="cls-2" d="M1003.72,1262.53H955.47l44.53,37.14,0-.91.1.09,0,.82,44.53-37.14Z"/>
+          </g>
+        </svg>
+      </div>
+      <h1>Welcome to Marten!</h1>
+    </header>
+    <main>
+      <p class="explanation">You are seeing this page because Marten is running in debug mode and you have not configured any routes for the root of your application.</p>
+      <p class="shortcut-links">
+        <%- if auth_available? -%>
+          <a href='<%= Marten.routes.reverse("auth:sign_in") %>'>Try generated authentication</a>
+        <%- end -%>
+      </a>
+    </main>
+    <footer>
+      <div class="useful-links">
+        <a href="https://martenframework.com/docs" target="_blank">
+          <span class="icon">
+            <!-- Ionicons v5.5.2 | MIT License | github.com/ionic-team/ionicons --><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 160c16-63.16 76.43-95.41 208-96a15.94 15.94 0 0116 16v288a16 16 0 01-16 16c-128 0-177.45 25.81-208 64-30.37-38-80-64-208-64-9.88 0-16-8.05-16-17.93V80a15.94 15.94 0 0116-16c131.57.59 192 32.84 208 96zM256 160v288" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/></svg>
+          </span>
+          <span class="content">
+            <span class="title">Marten documentation</span>
+            <span class="subtitle">Guides, how-to's, and references</span>
+          </span>
+        </a>
+        <a href="https://martenframework.com/docs/getting-started/tutorial" target="_blank">
+          <span class="icon">
+            <!-- Ionicons v5.5.2 | MIT License | github.com/ionic-team/ionicons --><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M160 368L32 256l128-112M352 368l128-112-128-112"/></svg>
+          </span>
+          <span class="content">
+            <span class="title">Tutorial - Build a web blog</span>
+            <span class="subtitle">Get started with Marten</span>
+          </span>
+        </a>
+        <a href="https://martenframework.com/chat" target="_blank">
+          <span class="icon">
+            <!-- Ionicons v5.5.2 | MIT License | github.com/ionic-team/ionicons --><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M431 320.6c-1-3.6 1.2-8.6 3.3-12.2a33.68 33.68 0 012.1-3.1A162 162 0 00464 215c.3-92.2-77.5-167-173.7-167-83.9 0-153.9 57.1-170.3 132.9a160.7 160.7 0 00-3.7 34.2c0 92.3 74.8 169.1 171 169.1 15.3 0 35.9-4.6 47.2-7.7s22.5-7.2 25.4-8.3a26.44 26.44 0 019.3-1.7 26 26 0 0110.1 2l56.7 20.1a13.52 13.52 0 003.9 1 8 8 0 008-8 12.85 12.85 0 00-.5-2.7z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32"/><path d="M66.46 232a146.23 146.23 0 006.39 152.67c2.31 3.49 3.61 6.19 3.21 8s-11.93 61.87-11.93 61.87a8 8 0 002.71 7.68A8.17 8.17 0 0072 464a7.26 7.26 0 002.91-.6l56.21-22a15.7 15.7 0 0112 .2c18.94 7.38 39.88 12 60.83 12A159.21 159.21 0 00284 432.11" fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32"/></svg>
+          </span>
+          <span class="content">
+            <span class="title">Chat with the community</span>
+            <span class="subtitle">Connect or ask for help in our chatroom</span>
+          </span>
+        </a>
+      </div>
+      <div class="versions">
+        <p><span class="version"><strong>Marten version:</strong> <%= Marten::VERSION %></span><span class="bull">&nbsp;&bull;&nbsp;</span><span class="version"><strong>Crystal version:</strong> <%= Crystal::VERSION %></span></p>
+      </div>
+    </footer>
+  </body>
+</html>

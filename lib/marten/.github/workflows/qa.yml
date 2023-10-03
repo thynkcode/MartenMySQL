@@ -1,0 +1,39 @@
+name: QA
+
+on:
+  push:
+    branches: "*"
+  pull_request:
+    branches: "*"
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  crystal:
+    runs-on: ubuntu-latest
+    container:
+      image: crystallang/crystal:1.8.0
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install shards
+        run: shards install --ignore-crystal-version
+      - name: QA checks
+        run: make qa
+  docs:
+    runs-on: ubuntu-latest
+    container:
+      image: crystallang/crystal:1.8.0
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+      - name: Install shards
+        run: shards install --ignore-crystal-version
+      - name: Install doc dependencies
+        run: cd docs && npm install
+      - name: Build doc
+        run: |
+          crystal docs --output=docs/static/api
+          cd docs && npm run build

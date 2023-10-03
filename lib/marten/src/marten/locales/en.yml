@@ -1,0 +1,81 @@
+en:
+  marten:
+    db:
+      field:
+        base:
+          errors:
+            blank: "This field cannot be blank."
+            nil: "This field cannot be null."
+        email:
+          errors:
+            invalid: "Enter a valid email address."
+        string:
+          errors:
+            too_short: "The minimum allowed length is %{min_size}"
+            too_long: "The maximum allowed length is %{max_size}"
+        text:
+          errors:
+            too_long: "The maximum allowed length is %{max_size}"
+        uuid:
+          errors:
+            invalid: "A valid UUID must be provided"
+    schema:
+      field:
+        base:
+          errors:
+            invalid: "The provided value is invalid."
+            required: "This field is required."
+        date:
+          errors:
+            invalid: "Enter a valid date."
+          input_formats:
+            - "%Y-%m-%d"
+            - "%m/%d/%Y"
+            - "%b %d %Y"
+            - "%b %d, %Y"
+            - "%d %b %Y"
+            - "%d %b, %Y"
+            - "%B %d %Y"
+            - "%B %d, %Y"
+            - "%d %B %Y"
+            - "%d %B, %Y"
+        date_time:
+          errors:
+            invalid: "Enter a valid date time."
+          input_formats:
+            - "%Y-%m-%d %H:%M:%S"
+            - "%Y-%m-%d %H:%M:%S.%f"
+            - "%Y-%m-%d %H:%M"
+            - "%m/%d/%Y %H:%M:%S"
+            - "%m/%d/%Y %H:%M:%S.%f"
+            - "%m/%d/%Y %H:%M"
+        duration:
+          errors:
+            invalid: "Enter a valid duration."
+        email:
+          errors:
+            invalid: "Enter a valid email address."
+        file:
+          errors:
+            empty: "Empty files are not allowed."
+            file_name_too_long: "The maximum allowed file name length is %{max_name_size}."
+        float:
+          errors:
+            invalid: "Enter a valid number."
+            too_small: "This value must be greater than or equal to %{min_value}."
+            too_big: "This value must be less than or equal to %{max_value}."
+        int:
+          errors:
+            invalid: "Enter a valid number."
+            too_small: "This value must be greater than or equal to %{min_value}."
+            too_big: "This value must be less than or equal to %{max_value}."
+        json:
+          errors:
+            invalid: "Enter a valid JSON."
+        string:
+          errors:
+            too_short: "The minimum allowed length is %{min_size}."
+            too_long: "The maximum allowed length is %{max_size}."
+        uuid:
+          errors:
+            invalid: "Enter a valid UUID."

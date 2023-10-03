@@ -1,0 +1,23 @@
+module Auth
+  class SignUpHandler < Marten::Handlers::RecordCreate
+    include RequireAnonymousUser
+
+    model User
+    schema SignUpSchema
+    template_name "auth/sign_up.html"
+    success_route_name "auth:profile"
+
+    def process_valid_schema
+      new_record = model.new(email: schema.email!)
+      new_record.set_password(schema.password1!)
+      new_record.save!
+
+      self.record = new_record
+
+      user = MartenAuth.authenticate(schema.email!, schema.password1!)
+      MartenAuth.sign_in(request, user.not_nil!)
+
+      redirect(success_url)
+    end
+  end
+end

@@ -1,0 +1,20 @@
+# Third party requirements.
+require "marten"
+<%- if @context.targets_auth? -%>
+require "marten_auth"
+<%- end -%>
+require "sqlite3"
+
+# Project requirements.
+<%- if @context.targets_auth? -%>
+require "./auth/app"
+<%- end -%>
+require "./handlers/**"
+require "./models/**"
+require "./schemas/**"
+
+# Configuration requirements.
+require "../config/routes"
+require "../config/settings/base"
+require "../config/settings/**"
+require "../config/initializers/**"

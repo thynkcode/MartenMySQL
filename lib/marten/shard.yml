@@ -1,0 +1,40 @@
+name: marten
+version: 0.3.3
+
+authors:
+  - Morgan Aubert <me@morganaubert.name>
+
+description: |
+  The pragmatic web framework.
+
+crystal: ">= 1.6.0"
+
+dependencies:
+  db:
+    github: crystal-lang/crystal-db
+  i18n:
+    github: crystal-i18n/i18n
+  msgpack:
+    github: crystal-community/msgpack-crystal
+
+development_dependencies:
+  ameba:
+    github: crystal-ameba/ameba
+    branch: master
+  mysql:
+    github: crystal-lang/crystal-mysql
+  pg:
+    github: will/crystal-pg
+  sqlite3:
+    github: crystal-lang/crystal-sqlite3
+  timecop:
+    github: crystal-community/timecop.cr
+
+targets:
+  marten:
+    main: src/marten_cli.cr
+
+scripts:
+  postinstall: scripts/precompile_marten_cli
+
+license: MIT
